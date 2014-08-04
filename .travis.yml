@@ -1,0 +1,19 @@
+language: node_js
+node_js:
+- '0.10'
+before_script:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- npm install -g grunt-cli
+- npm install -g bower
+script:
+- npm install
+- bower install
+- grunt test
+deploy:
+  provider: heroku
+  api_key:
+    secure: hgYDeqHh5LcJtZOpok6kq0F9SBH53YKM+EBOh70AMSDlNIMbLmrZIvjYJQZ04vY5W5qhZviGniwyy0gtM+cEMULobht3svmE9IZYnNc73tqW280/YB9SECt/jB7DQaJmo2HlFS3bwqaQ1iLli1XnihGNQUoolmFxxqgiwULaKZ4=
+  app: ng-imgur
+  on:
+    repo: Wildhoney/ngImgur
