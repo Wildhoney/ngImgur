@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Wildhoney/ngImgur/issues"
   },
-  "homepage": "https://github.com/Wildhoney/ngImgur"
+  "homepage": "https://github.com/Wildhoney/ngImgur",
+  "dependencies": {
+    "express": "^4.7.4"
+  }
 }
