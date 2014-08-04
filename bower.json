@@ -1,0 +1,24 @@
+{
+  "name": "ng-imgur",
+  "version": "0.1.0",
+  "homepage": "https://github.com/Wildhoney/ngImgur",
+  "authors": [
+    "Adam Timberlake <adam.timberlake@gmail.com>"
+  ],
+  "description": "Take your favourite cat picture, and upload it to Imgur.com w/ Angular!",
+  "main": "dist/ng-imgur.js",
+  "keywords": [
+    "imgur",
+    "angular",
+    "image",
+    "upload"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
