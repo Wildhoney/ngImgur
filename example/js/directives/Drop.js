@@ -21,15 +21,40 @@
             /**
              * @method link
              * @param scope {Object}
+             * @param element {Object}
              * @return {void}
              */
-            link: function link(scope) {
+            link: function link(scope, element) {
 
                 /**
                  * @property link
                  * @type {String}
                  */
                 scope.link = '';
+
+                /**
+                 * @method preventDefaultBehaviour
+                 * @param event {Object}
+                 * @return {void}
+                 */
+                scope.preventDefaultBehaviour = function preventDefaultBehaviour(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                };
+
+                element.on('drop', function onDrag(event) {
+
+                    scope.preventDefaultBehaviour(event);
+                    var image = event.dataTransfer.files[0];
+
+                    imgur.upload(image).then(function then(model) {
+                        scope.link = model.link;
+                    });
+
+                });
+
+                // Prevent the default behaviour on certain events.
+                element.on('dragover dragend dragleave', scope.preventDefaultBehaviour);
 
             }
 

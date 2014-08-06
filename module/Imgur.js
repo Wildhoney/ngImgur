@@ -1,15 +1,94 @@
 (function($angular) {
 
+    "use strict";
+
     // Something may or may not happen!
     var app = $angular.module('ngImgur', []);
+
+    /**
+     * @constant imgurOptions
+     * @type {Object}
+     */
+    app.constant('imgurOptions', {
+
+        /**
+         * @constant UPLOAD_URL
+         * @type {String}
+         */
+        UPLOAD_URL: 'https://api.imgur.com/3/image',
+
+        /**
+         * @constant UPLOAD_METHOD
+         * @type {String}
+         */
+        UPLOAD_METHOD: 'POST',
+
+        /**
+         * @constant API_KEY
+         * @type {String}
+         */
+        API_KEY: 'Client-ID 40dbfe0cfea73a7'
+
+    });
 
     /**
      * @service Imgur
      * @author Adam Timberlake <adam.timberlake@gmail.com>
      * @link https://github.com/Wildhoney/ngImgur
      */
-    app.service('imgur', function ImgurService() {
+    app.service('imgur', ['$window', '$http', '$q', 'imgurOptions', function ImgurService($window, $http, $q, imgurOptions) {
 
-    });
+        var service = {};
+
+        /**
+         * @method upload
+         * @param imageData {String}
+         * @return {$q.promise}
+         */
+        service.upload = function upload(imageData) {
+
+            // Begin reading the file as Base64.
+            var reader = new $window.FileReader(),
+                defer  = $q.defer();
+
+            /**
+             * @method onload
+             * @return {void}
+             */
+            reader.onload = function onload(event) {
+
+                // Strip the image type from the base64 data.
+                var base64Data  = event.target.result.split(',')[1],
+                    headerModel = { Authorization: 'Client-ID 40dbfe0cfea73a7' },
+                    dataModel   = { image: base64Data };
+
+                // Issue the request to upload the image data.
+                var request = $http({
+                    url:     imgurOptions.UPLOAD_URL,
+                    method:  imgurOptions.UPLOAD_METHOD,
+                    headers: headerModel,
+                    data:    dataModel
+                });
+
+                // Everything was a success!
+                request.then(function then(response) {
+                    defer.resolve(response.data.data);
+                });
+
+                // Something went wrong.
+                request.error(function error() {
+                    defer.reject();
+                });
+
+            };
+
+            reader.readAsDataURL(imageData);
+            return defer.promise;
+
+        };
+
+        return service;
+
+    }]);
 
 })(window.angular);
