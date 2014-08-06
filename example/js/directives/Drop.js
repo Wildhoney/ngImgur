@@ -13,13 +13,23 @@
             restrict: 'C',
 
             /**
+             * @property scope
+             * @type {Boolean}
+             */
+            scope: true,
+
+            /**
              * @method link
              * @param scope {Object}
              * @return {void}
              */
-            link: function link(scope, element) {
+            link: function link(scope) {
 
-
+                /**
+                 * @property link
+                 * @type {String}
+                 */
+                scope.link = '';
 
             }
 

@@ -2,3 +2,42 @@
 	margin: 0;
 	padding: 0;
 }
+
+body {
+    padding: 30px;
+}
+
+h1 {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 25px;
+}
+
+section.drop {
+    border: 1px solid rgba(0, 0, 0, .1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
+    border-radius: 3px;
+    width: 500px;
+    height: 400px;
+    position: relative;
+}
+
+section.drop:after {
+    content: "Drop your image right here, sunshine!";
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 20px;
+    position: absolute;
+    font-size: 11px;
+    color: rgba(0, 0, 0, .25);
+    text-decoration: underline;
+}
+
+section.drop input {
+    background-color: rgba(0, 0, 0, .1);
+    border: 0;
+    width: 50%;
+    outline: none;
+    margin: 50px 20px 20px 20px;
+    padding: 5px 10px;
+    position: absolute;
+}
