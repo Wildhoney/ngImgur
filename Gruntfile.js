@@ -13,7 +13,7 @@ module.exports = function(grunt) {
          * @type {Object}
          */
         jshint: {
-            all: 'components/*.js',
+            all: 'module/*.js',
             options: {
                 jshintrc: '.jshintrc'
             }
@@ -96,10 +96,11 @@ module.exports = function(grunt) {
 //    grunt.loadNpmTasks('grunt-contrib-jshint');
 //    grunt.loadNpmTasks('grunt-contrib-compress');
 //    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('build', ['copy']);
-    grunt.registerTask('test', ['jshint', 'karma']);
+    grunt.registerTask('test', ['jshint']);
     grunt.registerTask('default', ['jshint', 'karma', 'concat', 'copy', 'uglify', 'compress']);
 
 };
