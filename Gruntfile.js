@@ -96,6 +96,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('build', ['copy', 'concat', 'uglify']);
     grunt.registerTask('test', ['jshint', 'karma']);
-    grunt.registerTask('default', ['jshint', 'karma', 'concat', 'copy', 'uglify', 'compress']);
+    grunt.registerTask('default', ['jshint', 'karma', 'copy', 'concat', 'uglify']);
 
 };
