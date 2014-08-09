@@ -24,7 +24,9 @@ $angular.module('myApp', ['ngImgur']);
 And then import the service into any of your controllers, services, or directives:
 
 ```javascript
-myApp.controller('CatController', function(imgur));
+myApp.controller('CatController', function(imgur) {
+    // ...
+});
 ```
 
 Then with your image (see [`FileReader`](http://www.w3.org/TR/FileAPI/)) invoke the `imgur.upload` method:
@@ -42,3 +44,8 @@ imgur.upload([firstFile, secondFile, thirdFile]).then(function then(collection) 
     console.log('You uploaded ' + collection.length + ' balls of fur!');
 });
 ```
+
+Tests
+-------
+
+All of the `ngImgur` tests can be run using [Karma](http://karma-runner.github.io/) with the easiest method being the `grunt test` command after you've installed all Bower dependencies with `bower install`.
