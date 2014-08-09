@@ -47,6 +47,40 @@
          */
         service.upload = function upload(imageData) {
 
+            if (!$angular.isArray(imageData)) {
+
+                // Single image has been supplied so upload and return the promise immediately.
+                return this.send(imageData);
+
+            }
+
+            var defer    = $q.defer(),
+                promises = [];
+
+            // Otherwise we're dealing with an array of images.
+            $angular.forEach(imageData, function forEach(imageModel) {
+
+                // Attempt to send the image and keep a track of the promise it returns.
+                promises.push(service.send(imageModel));
+
+            });
+
+            // Once all the promises have been resolved then we can resolve our promise.
+            $q.all(promises).then(function then(resultModels) {
+                defer.resolve(resultModels);
+            });
+
+            return defer.promise;
+
+        };
+
+        /**
+         * @method send
+         * @param imageData {Object}
+         * @return {$q.promise}
+         */
+        service.send = function send(imageData) {
+
             // Begin reading the file as Base64.
             var reader = new $window.FileReader(),
                 defer  = $q.defer();
@@ -59,7 +93,7 @@
 
                 // Strip the image type from the base64 data.
                 var base64Data  = event.target.result.split(',')[1],
-                    headerModel = { Authorization: 'Client-ID 40dbfe0cfea73a7' },
+                    headerModel = { Authorization: imgurOptions.API_KEY },
                     dataModel   = { image: base64Data };
 
                 // Issue the request to upload the image data.
