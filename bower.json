@@ -23,6 +23,7 @@
   ],
   "dependencies": {
     "angular": "~1.2.21",
-    "angular-mocks": "~1.2.21"
+    "angular-mocks": "~1.2.21",
+    "sinon": "~1.10.3"
   }
 }
