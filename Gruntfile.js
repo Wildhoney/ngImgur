@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> by <%= pkg.author %> created on <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: ['dist/<%= pkg.name %>.js'],
+                src: ['module/*.js'],
                 dest: 'dist/<%= pkg.name %>.min.js'
             }
         },
@@ -56,21 +56,7 @@ module.exports = function(grunt) {
             unit: {
                 configFile: 'KarmaUnit.js',
                 background: false,
-                browsers: ['Firefox']
-            }
-        },
-
-        /**
-         * @property concat
-         * @type {Object}
-         */
-        concat: {
-            options: {
-                separator: '\n\n'
-            },
-            dist: {
-                src: ['components/Service.js', 'components/*.js'],
-                dest: 'dist/<%= pkg.name %>.js'
+                browsers: ['Firefox', 'PhantomJS']
             }
         },
 
@@ -86,20 +72,29 @@ module.exports = function(grunt) {
                 dest: 'example/js/vendor/<%= pkg.name %>',
                 filter: 'isFile'
             }
+        },
 
+        /**
+         * @property concat
+         * @type {Object}
+         */
+        concat: {
+            dist: {
+                src: ['module/*.js'],
+                dest: 'dist/<%= pkg.name %>.js'
+            }
         }
 
     });
 
 //    grunt.loadNpmTasks('grunt-karma');
-//    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-//    grunt.loadNpmTasks('grunt-contrib-compress');
-//    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('build', ['copy']);
+    grunt.registerTask('build', ['copy', 'concat', 'uglify']);
     grunt.registerTask('test', ['jshint']);
     grunt.registerTask('default', ['jshint', 'karma', 'concat', 'copy', 'uglify', 'compress']);
 
