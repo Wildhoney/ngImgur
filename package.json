@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/Wildhoney/ngImgur.git"
   },
+  "engines": {
+     "node": "0.10.x"
+  },
   "keywords": [
     "imgur",
     "angular",
