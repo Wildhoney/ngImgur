@@ -31,6 +31,14 @@ Then with your image (see [`FileReader`](http://www.w3.org/TR/FileAPI/)) invoke 
 
 ```javascript
 imgur.upload(file).then(function then(model) {
-    console.log('Your cat be here: ' + model.link);
+    console.log('Your adorable cat be here: ' + model.link);
+});
+```
+
+Using the `upload` method you can also upload an array of images &ndash; everything remains the same except the argument passed into `then` which would be a collection of the models.
+
+```javascript
+imgur.upload([firstFile, secondFile, thirdFile]).then(function then(collection) {
+    console.log('You uploaded ' + collection.length + ' balls of fur!');
 });
 ```
