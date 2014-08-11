@@ -27,7 +27,7 @@
          * @constant API_KEY
          * @type {String}
          */
-        API_KEY: 'Client-ID 40dbfe0cfea73a7'
+        API_KEY: ''
 
     });
 
@@ -41,11 +41,27 @@
         var service = {};
 
         /**
+         * @method setAPIKey
+         * @param apiKey {String}
+         * @return {void}
+         */
+        service.setAPIKey = function setAPIKey(apiKey) {
+            imgurOptions.API_KEY = apiKey;
+        };
+
+        /**
          * @method upload
          * @param imageData {String}
          * @return {$q.promise}
          */
         service.upload = function upload(imageData) {
+
+            if (!imgurOptions.API_KEY) {
+
+                // Ensure the `API_KEY` has been defined.
+                throw "ngImgur: You must define your API key in `imgurOptions.API_KEY`.";
+
+            }
 
             if (!$angular.isArray(imageData)) {
 

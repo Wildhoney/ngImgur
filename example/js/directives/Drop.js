@@ -26,6 +26,9 @@
              */
             link: function link(scope, element) {
 
+                // Define the Imgur.com API key.
+                imgur.setAPIKey('Client-ID 40dbfe0cfea73a7');
+
                 /**
                  * @property link
                  * @type {String}

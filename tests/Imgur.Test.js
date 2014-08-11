@@ -32,12 +32,6 @@ describe('Imgur', function() {
             }
         };
 
-        // Ensure all of the necessary methods were invoked.
-//        spyOn($window.FileReader.prototype, 'readAsDataURL').andCallThrough();
-//        spyOn($window.FileReader.prototype, 'onload').andCallThrough();
-//        expect($window.FileReader.prototype.readAsDataURL).toHaveBeenCalled();
-
-
         // Attempt to mock the uploading of the image to Imgur.com.
         imgur.upload(imageData).then(function then(response) {
             expect(response.link).toEqual(imgurLink);
