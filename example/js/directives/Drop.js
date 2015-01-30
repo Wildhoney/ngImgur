@@ -1,16 +1,16 @@
 (function($angular) {
 
     // Our lovely directive!
-    $angular.module('imgurApp').directive('drop', ['imgur', function DropDirective(imgur) {
+    $angular.module('imgurApp').directive('drop', ['$timeout', 'imgur', function DropDirective($timeout, imgur) {
 
         return {
 
             /**
              * @property restrict
              * @type {String}
-             * @default "C"
+             * @default "EAC"
              */
-            restrict: 'C',
+            restrict: 'EAC',
 
             /**
              * @property scope
@@ -36,6 +36,12 @@
                 scope.link = '';
 
                 /**
+                 * @property message
+                 * @type {String}
+                 */
+                scope.message = 'Drop Image...';
+
+                /**
                  * @method preventDefaultBehaviour
                  * @param event {Object}
                  * @return {void}
@@ -49,9 +55,17 @@
 
                     scope.preventDefaultBehaviour(event);
                     var image = event.dataTransfer.files[0];
+                    scope.message = 'Uploading Image...';
 
                     imgur.upload(image).then(function then(model) {
+
                         scope.link = model.link;
+                        scope.message = 'Uploaded Image!';
+
+                        $timeout(function timeout() {
+                            scope.message = 'Drop Image...';
+                        }, 2500);
+
                     });
 
                 });

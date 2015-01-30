@@ -1,43 +1,47 @@
 * {
 	margin: 0;
 	padding: 0;
+    font-family: Arial, Helvetica, Sans-serif;
 }
 
 body {
-    padding: 30px;
+    background-color: rgba(0, 0, 0, .05);
+    overflow: hidden;
 }
 
 h1 {
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 25px;
+    color: white;
+    color: rgba(0, 0, 0, .25);
 }
 
 section.drop {
-    border: 1px solid rgba(0, 0, 0, .1);
-    box-shadow: 0 0 20px rgba(0, 0, 0, .15);
-    border-radius: 3px;
-    width: 500px;
-    height: 400px;
-    position: relative;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-section.drop:after {
-    content: "Drop your image right here, sunshine!";
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 20px;
-    position: absolute;
-    font-size: 11px;
-    color: rgba(0, 0, 0, .25);
-    text-decoration: underline;
+section.drop h2 {
+    color: rgba(0, 0, 0,.25);
+    font-weight: normal;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, .5);
 }
 
 section.drop input {
     background-color: rgba(0, 0, 0, .1);
     border: 0;
-    width: 50%;
+    font-size: 18px;
+    bottom: 20px;
+    left: 20px;
     outline: none;
-    margin: 50px 20px 20px 20px;
-    padding: 5px 10px;
+    padding: 25px 30px;
+    border-radius: 3px;
+    width: 40%;
     position: absolute;
 }
