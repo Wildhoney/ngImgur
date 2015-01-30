@@ -12,9 +12,13 @@ script:
   - npm install
   - bower install
   - grunt test
+  - grunt build
 
 deploy:
   provider: heroku
+  strategy: api
+  skip_cleanup: true
+  all_branches: true
   api_key:
     secure: hgYDeqHh5LcJtZOpok6kq0F9SBH53YKM+EBOh70AMSDlNIMbLmrZIvjYJQZ04vY5W5qhZviGniwyy0gtM+cEMULobht3svmE9IZYnNc73tqW280/YB9SECt/jB7DQaJmo2HlFS3bwqaQ1iLli1XnihGNQUoolmFxxqgiwULaKZ4=
   app: ng-imgur
