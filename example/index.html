@@ -22,7 +22,11 @@
 
         <h2>{{message}}</h2>
 
-        <input type="text" placeholder="Imgur Link: Please upload an image first..." readonly="readonly" ng-model="link" />
+        <input type="text"
+               ng-model="link"
+               readonly="readonly"
+               onclick="this.select();"
+               placeholder="Imgur Link: Please upload an image first..." />
 
     </section>
 
