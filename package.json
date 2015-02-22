@@ -1,6 +1,6 @@
 {
   "name": "ng-imgur",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Take your favourite cat picture, and upload it to Imgur.com w/ Angular!",
   "main": "dist/ng-imgur.js",
   "scripts": {
