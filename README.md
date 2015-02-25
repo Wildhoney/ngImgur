@@ -25,7 +25,7 @@ And then import the service into any of your controllers, services, or directive
 
 ```javascript
 myApp.controller('CatController', function(imgur) {
-    // ...
+    ...
 });
 ```
 
