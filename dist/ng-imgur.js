@@ -54,7 +54,8 @@
          * @param imageData {String}
          * @return {$q.promise}
          */
-        service.upload = function upload(imageData) {
+        service.upload = function upload(imageData, isBase64) {
+            isBase64 = (typeof isBase64 !== 'undefined') ? isBase64 : false;
 
             if (!imgurOptions.API_KEY) {
 
@@ -66,7 +67,7 @@
             if (!$angular.isArray(imageData)) {
 
                 // Single image has been supplied so upload and return the promise immediately.
-                return this.send(imageData);
+                return this.send(imageData, isBase64);
 
             }
 
@@ -77,7 +78,7 @@
             $angular.forEach(imageData, function forEach(imageModel) {
 
                 // Attempt to send the image and keep a track of the promise it returns.
-                promises.push(service.send(imageModel));
+                promises.push(service.send(imageModel, isBase64));
 
             });
 
@@ -95,20 +96,15 @@
          * @param imageData {Object}
          * @return {$q.promise}
          */
-        service.send = function send(imageData) {
-
-            // Begin reading the file as Base64.
-            var reader = new $window.FileReader(),
-                defer  = $q.defer();
-
+        service.send = function send(imageData, isBase64) {
+            var defer  = $q.defer();
             /**
              * @method onload
              * @return {void}
              */
-            reader.onload = function onload(event) {
-
+            function doRequest(isAlreadyBase64){
                 // Strip the image type from the base64 data.
-                var base64Data  = event.target.result.split(',')[1],
+                var base64Data  = (isAlreadyBase64) ? imageData : event.target.result.split(',')[1],
                     headerModel = { Authorization: imgurOptions.API_KEY },
                     dataModel   = { image: base64Data };
 
@@ -132,7 +128,15 @@
 
             };
 
-            reader.readAsDataURL(imageData);
+            if(isBase64){
+                doRequest(true);
+            } else {
+                // Begin reading the file as Base64.
+                var reader = new $window.FileReader();
+                reader.onload = doRequest(false);
+                reader.readAsDataURL(imageData);
+            }
+
             return defer.promise;
 
         };
