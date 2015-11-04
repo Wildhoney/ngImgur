@@ -109,7 +109,7 @@
 
                 // Strip the image type from the base64 data.
                 var base64Data  = event.target.result.split(',')[1],
-                    headerModel = { Authorization: 'Client-ID ' + imgurOptions.API_KEY },
+                    headerModel = { Authorization: imgurOptions.API_KEY },
                     dataModel   = { image: base64Data };
 
                 // Issue the request to upload the image data.
